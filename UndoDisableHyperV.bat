@@ -113,8 +113,16 @@ echo         /v Enabled /t REG_DWORD /d 1 /f
 echo     reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
 echo         /v WasEnabledBy /t REG_DWORD /d 2 /f
 timeout 10 /nobreak
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v Enabled /t REG_DWORD /d 1 /f
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v WasEnabledBy /t REG_DWORD /d 2 /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity ^
+    /v Enabled ^
+    /t REG_DWORD ^
+    /d 1 ^
+    /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity ^
+    /v WasEnabledBy ^
+    /t REG_DWORD ^
+    /d 2 ^
+    /f
 echo.
 
 echo =========================================================================
@@ -123,8 +131,31 @@ echo =========================================================================
 echo Enabling Virtualization-Based Security in the registry, by running:
 echo     reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard /v EnableVirtualizationBasedSecurity
 echo         /t REG_DWORD /d 1 /f
+echo     reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard /v RequirePlatformSecurityFeatures
+echo         /t REG_DWORD /d 1 /f
 timeout 10 /nobreak
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard /v EnableVirtualizationBasedSecurity /t REG_DWORD /d 1 /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard ^
+    /v EnableVirtualizationBasedSecurity ^
+    /t REG_DWORD ^
+    /d 1 ^
+    /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard ^
+    /v RequirePlatformSecurityFeatures ^
+    /t REG_DWORD ^
+    /d 1 ^
+    /f
+echo.
+
+echo =========================================================================
+echo -------------------------------------------------------------------------
+echo =========================================================================
+echo Enabling Virtualization-Based Security in boot configuration data, by running:
+echo     bcdedit /deletevalue {0cb3b571-2f2e-4343-a879-d86a476d7215} loadoptions
+echo     bcdedit /set vsmlaunchtype auto
+echo NOTE These commands may print error messages. They may be safely ignored.
+timeout 10 /nobreak
+bcdedit /deletevalue {0cb3b571-2f2e-4343-a879-d86a476d7215} loadoptions
+bcdedit /set vsmlaunchtype auto
 echo.
 
 echo =========================================================================
