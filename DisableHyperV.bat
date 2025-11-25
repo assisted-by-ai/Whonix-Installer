@@ -136,8 +136,16 @@ echo         /v Enabled /t REG_DWORD /d 0 /f
 echo     reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
 echo         /v WasEnabledBy /t REG_DWORD /d 2 /f
 timeout 10 /nobreak
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v Enabled /t REG_DWORD /d 0 /f
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v WasEnabledBy /t REG_DWORD /d 2 /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity ^
+    /v Enabled ^
+    /t REG_DWORD ^
+    /d 0 ^
+    /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity ^
+    /v WasEnabledBy ^
+    /t REG_DWORD ^
+    /d 2 ^
+    /f
 echo.
 
 echo =========================================================================
